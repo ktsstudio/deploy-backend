@@ -34,14 +34,21 @@ class UserAccessor:
 class SessionAccessor(Accessor):
     async def generate_session(self, username: str) -> Session:
         session_id = uuid.uuid4().hex
-        row = await self.store.pg.conn.fetchrow("""
+        row = await self.store.pg.conn.fetchrow(
+            """
             INSERT INTO session VALUES ($1, $2) RETURNING *
-        """, session_id, username)
+        """,
+            session_id,
+            username,
+        )
         return Session(**dict(row))
 
     async def get_by_id(self, session_id) -> Optional[Session]:
-        row = await self.store.pg.conn.fetchrow("""
+        row = await self.store.pg.conn.fetchrow(
+            """
             SELECT * FROM session WHERE id = $1
-        """, session_id)
+        """,
+            session_id,
+        )
         if row:
             return Session(**dict(row))

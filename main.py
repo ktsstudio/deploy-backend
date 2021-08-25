@@ -1,4 +1,5 @@
 import logging
+
 logging.getLogger().setLevel(logging.DEBUG)
 
 from aiohttp import web

@@ -12,9 +12,7 @@ from gino import GinoEngine
 import settings
 from server.store import Store
 
-settings.config = settings.get_config(
-    settings.BASE_DIR / "config" / "test.yaml"
-)
+settings.config = settings.get_config(settings.BASE_DIR / "config" / "test.yaml")
 from server.store.gino import db
 from server.web.app import create_app
 from tests.fixtures import *
@@ -43,6 +41,7 @@ async def db_transaction(cli):
     real_acquire = GinoEngine.acquire
 
     async with db.acquire() as conn:
+
         class _AcquireContext:
             __slots__ = ["_acquire", "_conn"]
 
@@ -58,9 +57,7 @@ async def db_transaction(cli):
             def __await__(self):
                 return conn
 
-        def acquire(
-                self, *, timeout=None, reuse=False, lazy=False, reusable=True
-        ):
+        def acquire(self, *, timeout=None, reuse=False, lazy=False, reusable=True):
             return _AcquireContext(
                 functools.partial(self._acquire, timeout, reuse, lazy, reusable)
             )
@@ -94,7 +91,7 @@ class authenticate:
 
     async def __aenter__(self):
         s = await self.store.session.generate_session(self.user.username)
-        self.cli.session.cookie_jar.update_cookies({'session_id': s.id})
+        self.cli.session.cookie_jar.update_cookies({"session_id": s.id})
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        self.cli.session.cookie_jar.update_cookies({'session_id': ''})
+        self.cli.session.cookie_jar.update_cookies({"session_id": ""})

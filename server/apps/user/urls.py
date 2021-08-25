@@ -1,6 +1,11 @@
 from aiohttp import web
 
-from server.apps.user.views import UserRegisterView, UserLoginView, UserMeView, UserTestView
+from server.apps.user.views import (
+    UserRegisterView,
+    UserLoginView,
+    UserMeView,
+    UserTestView,
+)
 
 
 def setup_urls(app: web.Application):

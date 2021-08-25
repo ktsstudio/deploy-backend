@@ -40,10 +40,7 @@ class UserTestView(BaseView):
     @response_schema(TestResponse.Schema)
     async def get(self):
         async with aiohttp.ClientSession() as session:
-            async with session.get('http://httpbin.org/get') as resp:
+            async with session.get("http://httpbin.org/get") as resp:
                 status = resp.status
                 body = await resp.text()
-        return {
-            'status': status,
-            'body': body
-        }
+        return {"status": status, "body": body}

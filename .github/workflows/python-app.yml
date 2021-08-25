@@ -12,12 +12,12 @@ jobs:
 
     runs-on: ubuntu-latest
     services:
-      postgres:
+      pg:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: test_blog_app
+          POSTGRES_DB: 09db
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
