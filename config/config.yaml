@@ -1,0 +1,8 @@
+common:
+  port: 8080
+postgres:
+  host: pg
+  port: 5432
+  database: 09db
+  username: postgres
+  password: password
