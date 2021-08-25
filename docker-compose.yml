@@ -1,9 +1,13 @@
+version: "2.4"
 services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
       POSTGRES_DB: 09db
+    healthcheck:
+      test: POSTGRES_PASSWORD=password pg_isready -q -U postgres -d 09db
   api:
     build:
       context: .

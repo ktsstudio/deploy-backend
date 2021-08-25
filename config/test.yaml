@@ -1,7 +1,7 @@
 common:
   port: 8080
 postgres:
-  host: 127.0.0.1
+  host: postgres
   port: 5432
   database: 09db
   username: postgres

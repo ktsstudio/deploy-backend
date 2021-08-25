@@ -1,0 +1,8 @@
+common:
+  port: $PORT
+postgres:
+  host: $DATABASE_HOST
+  port: $DATABASE_PORT
+  database: $DATABASE_NAME
+  username: $DATABASE_USER
+  password: $DATABASE_PASSWORD
