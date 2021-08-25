@@ -11,7 +11,7 @@ from tests.conftest import authenticate
 
 class TestUserRegister:
     async def test_validation(self, cli):
-        resp = await cli.post("/user.register")
+        resp = await cli.post("/user.register_new")
         document = await resp.json()
         assert document == {
             "password": ["Missing data for required field."],
@@ -20,7 +20,7 @@ class TestUserRegister:
 
     async def test_success(self, cli, store: Store):
         resp = await cli.post(
-            "/user.register", json={"password": "password", "username": "username"}
+            "/user.register_new", json={"password": "password", "username": "username"}
         )
         document = await resp.json()
         user = await store.user.get_by_username("username")
@@ -30,7 +30,7 @@ class TestUserRegister:
     @pytest.mark.usefixtures("user1")
     async def test_already_exists(self, cli, store: Store):
         resp = await cli.post(
-            "/user.register", json={"password": "password", "username": "username"}
+            "/user.register_new", json={"password": "password", "username": "username"}
         )
         document = await resp.json()
         assert resp.status == 400
