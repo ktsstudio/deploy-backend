@@ -12,4 +12,4 @@ class User(db.Model):
 class Session(db.Model):
     __tablename__ = "session"
     id = db.Column(db.String(32), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey("user.id"), nullable=False)
+    username = db.Column(db.String(64), db.ForeignKey("user.id"), nullable=False)
