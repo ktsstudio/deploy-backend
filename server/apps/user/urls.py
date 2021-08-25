@@ -9,7 +9,7 @@ from server.apps.user.views import (
 
 
 def setup_urls(app: web.Application):
-    app.router.add_view("/user.register", UserRegisterView)
+    app.router.add_view("/user.register_new", UserRegisterView)
     app.router.add_view("/user.login", UserLoginView)
     app.router.add_view("/user.me", UserMeView)
     app.router.add_view("/user.test", UserTestView)
